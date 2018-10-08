@@ -1,0 +1,2 @@
+Example of a simple autoconf config and RPM spec file for building
+GlusterFS xlators outside the build tree.
