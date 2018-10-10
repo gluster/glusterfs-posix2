@@ -1,3 +1,5 @@
+dnl Copyright 2018 Red Hat, Inc.
+
 AC_PREREQ([2.69])
 
 AC_INIT([glusterfs-posix2], [1.0], [bugmenot@gluster.org])
@@ -32,7 +34,8 @@ AC_PROG_LIBTOOL
 
 # Dependencies
 dnl Because there isn't a pkg-conf for glusterfs-devel
-PKG_CHECK_MODULES([GFAPI], [glusterfs-api >= 4.1.0],,[AC_MSG_ERROR([cannot find glusterfs api headers])])
+PKG_CHECK_MODULES([GFAPI], [glusterfs-api >= 3.12.0],,[AC_MSG_ERROR([cannot find glusterfs api headers])])
+PKG_CHECK_MODULES([UUID], [uuid],, [AC_MSG_ERROR([cannot find libuuid headers])])
 
 case $host_os in
      *netbsd*)
