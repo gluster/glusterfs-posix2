@@ -68,9 +68,11 @@ AC_SUBST(SIZEOF_INT)
 AC_SUBST(SIZEOF_LONG)
 AC_SUBST(SIZEOF_LONG_LONG)
 
-GF_CPPFLAGS="-D_FILE_OFFSET_BITS=64 -D_GNU_SOURCE -D${GF_HOST_OS}"
+GF_CPPINCLUDES='-include $(top_builddir)/config.h'
+GF_CPPDEFINES="-D_GNU_SOURCE -D${GF_HOST_OS}"
+GF_CPPFLAGS="$GF_CPPDEFINES $GF_CPPINCLUDES"
 AC_SUBST(GF_CPPFLAGS)
-GF_CFLAGS="-I /usr/include/glusterfs -I /usr/include/glusterfs/rpc -I /usr/include/glusterfs/xdr -isystem /usr/include/tirpc"
+GF_CFLAGS="-I/usr/include/glusterfs -I/usr/include/glusterfs/rpc -I/usr/include/glusterfs/xdr -isystem /usr/include/tirpc ${GFAPI_CFLAGS}"
 AC_SUBST(GF_CFLAGS)
 GF_LIBS="$(echo ${GFAPI_LIBS} | sed -e 's/ -lgfapi//')"
 AC_SUBST(GF_LIBS)
@@ -79,7 +81,7 @@ AC_SUBST(HAVE_ATOMIC_BUILTINS)
 
 dnl gfapi Version: is the "api version" but we can infer which
 dnl version of glusterfs it is.
-PACKAGE_VERSION=$(pkg-config --modversion glusterfs-api | sed -e 's/7\.//')
+PACKAGE_VERSION=$(pkg-config --modversion glusterfs-api | sed -e 's/[0-9]\.//')
 AC_SUBST(PACKAGE_VERSION)
 VERSION=${PACKAGE_VERSION}
 AC_SUBST(VERSION)
